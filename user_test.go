@@ -2,12 +2,21 @@ package gointercom
 
 import (
 	"log"
+	"os"
 	"testing"
+
+	"github.com/joho/godotenv"
 )
 
 func TestUserGetUserByID(t *testing.T) {
 	config := GetConfig()
-	config.SetToken("dG9rOjM0NWU4ZmE0X2Q5MGFfNDMxN184MWE4XzVjNDEzOTZjYjA5MjoxOjA=")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	token := os.Getenv("INTERCOM_TOKEN")
+	config.SetToken(token)
 
 	jsonData, err := UserGetUserByID("5c3f1af67e46af2a70214a51")
 	if err != nil {
@@ -18,7 +27,13 @@ func TestUserGetUserByID(t *testing.T) {
 
 func TestUserGetUsers(t *testing.T) {
 	config := GetConfig()
-	config.SetToken("dG9rOjM0NWU4ZmE0X2Q5MGFfNDMxN184MWE4XzVjNDEzOTZjYjA5MjoxOjA=")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	token := os.Getenv("INTERCOM_TOKEN")
+	config.SetToken(token)
 
 	jsonData, err := UserGetUsers()
 	if err != nil {

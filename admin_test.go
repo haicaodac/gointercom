@@ -2,12 +2,21 @@ package gointercom
 
 import (
 	"log"
+	"os"
 	"testing"
+
+	"github.com/joho/godotenv"
 )
 
 func TestAdminGetAdmins(t *testing.T) {
 	config := GetConfig()
-	config.SetToken("dG9rOjM0NWU4ZmE0X2Q5MGFfNDMxN184MWE4XzVjNDEzOTZjYjA5MjoxOjA=")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	token := os.Getenv("INTERCOM_TOKEN")
+	config.SetToken(token)
 
 	jsonData, err := AdminGetAdmins()
 	if err != nil {
