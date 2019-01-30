@@ -1,1 +1,1 @@
-module github.com/haicaodac/goshopify
+module gointercom
