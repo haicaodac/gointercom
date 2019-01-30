@@ -1,6 +1,8 @@
 package gointercom
 
 import (
+	"bytes"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -32,6 +34,28 @@ func Get(url string) ([]byte, error) {
 }
 
 // Post ...
-// func Post(url string, data map[string]interface{}) ([]byte, error) {
+func Post(url string, data string) ([]byte, error) {
+	var cfg = GetConfig()
 
-// }
+	var AccessToken = cfg.GetToken()
+	var bearer = "Bearer " + AccessToken
+
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(data)))
+
+	// add authorization header to the req
+	req.Header.Add("Authorization", bearer)
+	req.Header.Add("Accept", "application/json")
+	req.Header.Add("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	fmt.Println("response Status:", resp.Status)
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+	return []byte(body), nil
+}

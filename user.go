@@ -2,12 +2,15 @@ package gointercom
 
 import (
 	"encoding/json"
+	"log"
 )
 
 // UserGetUserByID ..
 func UserGetUserByID(id string) (IntercomUser, error) {
-	url := "https://api.intercom.io/users/" + id
+	url := "https://api.intercom.io/admins"
 	byteData, err := Get(url)
+	log.Println(string(byteData[:]))
+
 	if err != nil {
 		return IntercomUser{}, err
 	}

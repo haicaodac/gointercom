@@ -20,8 +20,14 @@ type IntercomUsers struct {
 
 // IntercomConversation ...
 type IntercomConversation struct {
-	Assignee map[string]interface{} `json:"assignee"`
-	User     map[string]interface{} `json:"user"`
+	Assignee            map[string]interface{} `json:"assignee"`
+	User                map[string]interface{} `json:"user"`
+	ConversationMessage map[string]interface{} `json:"conversation_message"`
+	ConversationParts   map[string]interface{} `json:"conversation_parts"`
+	ConversationRating  map[string]interface{} `json:"conversation_rating"`
+	CreatedAt           string                 `json:"created_at"`
+	UpdatedAt           string                 `json:"updated_at"`
+	Type                string                 `json:"type"`
 }
 
 // IntercomPaginator ...
@@ -55,4 +61,25 @@ type IntercomNotes struct {
 	Type  string            `json:"type"`
 	Pages IntercomPaginator `json:"pages"`
 	Notes []IntercomNote    `json:"notes"`
+}
+
+// Response ...
+type Response struct {
+	Status  string                 `json:"status"`
+	Message string                 `json:"message"`
+	Data    map[string]interface{} `json:"data"`
+}
+
+// Admin ...
+type Admin struct {
+	Type  string `json:"type"`
+	Email string `json:"email"`
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+}
+
+// AdminList ...
+type AdminList struct {
+	Type   string  `json:"type"`
+	Admins []Admin `json:"admins"`
 }
