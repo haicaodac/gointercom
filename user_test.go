@@ -18,7 +18,7 @@ func TestUserGetUserByID(t *testing.T) {
 	token := os.Getenv("INTERCOM_TOKEN")
 	config.SetToken(token)
 
-	jsonData, err := UserGetUserByID("5c3f1af67e46af2a70214a51")
+	jsonData, err := UserGetUserByID("58661531e433f56ce65d29b5")
 	if err != nil {
 		log.Println(err)
 	}
