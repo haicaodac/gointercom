@@ -34,13 +34,13 @@ func Get(url string) ([]byte, error) {
 }
 
 // Post ...
-func Post(url string, data string) ([]byte, error) {
+func Post(url string, data []byte) ([]byte, error) {
 	var cfg = GetConfig()
 
 	var AccessToken = cfg.GetToken()
 	var bearer = "Bearer " + AccessToken
 
-	req, err := http.NewRequest("POST", url, bytes.NewBuffer([]byte(data)))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(data))
 
 	// add authorization header to the req
 	req.Header.Add("Authorization", bearer)
@@ -57,5 +57,5 @@ func Post(url string, data string) ([]byte, error) {
 	fmt.Println("response Status:", resp.Status)
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
-	return []byte(body), nil
+	return body, nil
 }

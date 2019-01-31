@@ -25,10 +25,11 @@ func ConversationGetByID(id string) (IntercomConversation, error) {
 
 /*
 ConversationReply ...
-	@param: id string // conversation_id
+	@params: id string // conversation_id
 			data string // json data
+	@return: error
 */
-func ConversationReply(id string, data string) error {
+func ConversationReply(id string, data []byte) error {
 	url := "https://api.intercom.io/conversations/" + id + "/reply"
 	byteData, err := Post(url, data)
 	if err != nil {
